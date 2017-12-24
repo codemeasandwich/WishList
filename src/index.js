@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/bootstrap.min.css'; 
+import './assets/bootstrap.min.css';
+
+
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { WishList } from "./models/WishList"
+import { Group } from "./models/Group"
 import { onSnapshot, getSnapshot } from "mobx-state-tree"
 
 let init = {
 
-  items:[{
-      name:"Studio Ghibli Howl's Moving Castle All Year Calendar",
-      price:74.99,
-      image:"https://images-na.ssl-images-amazon.com/images/I/51%2Bx7t67joL.jpg"
-    },{
-      name:"Hellsing: Complete",
-      price:59.99,
-      image:"https://images-na.ssl-images-amazon.com/images/I/51K0BQGC29L.jpg"
-    }]
+    users:{
+        "a342": { id:"a342", name: "Homer", gender:"m" },
+        "5fc2": { id:"5fc2", name: "Marge", gender:"f" },
+    }
 }
 /*
 if (localStorage.getItem("wishlistapp")) {
@@ -27,7 +24,7 @@ if (localStorage.getItem("wishlistapp")) {
   }
 }*/
 
-let wishList = WishList.create(init)
+let group = Group.create(init)
 /*
 setInterval(()=>{
   wishList.items[0].changePrice(
@@ -39,7 +36,7 @@ setInterval(()=>{
 
 
 function renderApp(){
-ReactDOM.render(<App wishList={wishList}/>, document.getElementById('root'));
+ReactDOM.render(<App group={group}/>, document.getElementById('root'));
 registerServiceWorker();
 }
 
@@ -48,8 +45,8 @@ renderApp()
 if (module && module.hot) {
   module.hot.accept(["./components/App"],()=>renderApp())
   module.hot.accept(["./models/WishList"],()=>{
-    const snapshot = getSnapshot(wishList)
-    wishList = WishList.create(snapshot)
+    const snapshot = getSnapshot(group)
+    group = Group.create(snapshot)
     renderApp()
   })
 }
