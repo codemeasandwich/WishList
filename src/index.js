@@ -18,11 +18,11 @@ const wishList = WishList.create({
       image:"https://images-na.ssl-images-amazon.com/images/I/51K0BQGC29L.jpg"
     }]
 })
-
+/*
 setInterval(()=>{
   wishList.items[0].changePrice(
   wishList.items[0].price + 1 )
   },1000)
-
+*/
 ReactDOM.render(<App wishList={wishList}/>, document.getElementById('root'));
 registerServiceWorker();
