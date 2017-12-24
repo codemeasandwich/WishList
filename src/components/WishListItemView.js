@@ -21,7 +21,6 @@ class WishListItemView extends Component {
                   </div>
                   <div className="media-right" style={{paddingRight: 10}}>
                   <div class="btn-group" role="group" style={{width: 100}}>
-                  
                       <button className="btn btn-info" style={{fontSize: "x-large"}} onClick={this.onSaveEdit}>🖬</button>
                       <button className="btn btn-danger" style={{fontSize: "x-large"}} onClick={this.onCancelEdit}>✘</button>
                   </div>
@@ -39,7 +38,10 @@ class WishListItemView extends Component {
         <span class="label label-warning">{item.price}</span>
       </div>
       <div className="media-right" style={{paddingRight: 10}}>
-       <button className="btn btn-primary" style={{fontSize: "x-large"}} onClick={this.onToggleEdit}> ✎ </button>
+      <div class="btn-group" role="group" style={{width: 100}}>
+          <button className="btn btn-primary" style={{fontSize: "x-large"}} onClick={this.onToggleEdit}> ✎ </button>
+          <button className="btn btn-danger" style={{fontSize: "x-large"}} onClick={item.remove}>🗑</button>
+      </div>
       </div>
     </div>)
   }
