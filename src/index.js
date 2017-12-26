@@ -7,7 +7,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Group } from "./models/Group"
-import { onSnapshot, getSnapshot } from "mobx-state-tree"
+import { onSnapshot, getSnapshot, addMiddleware } from "mobx-state-tree"
 
 let init = {
 
@@ -25,6 +25,12 @@ if (localStorage.getItem("wishlistapp")) {
 }*/
 
 let group = Group.create(init)
+
+addMiddleware(group, (call,next)=>{
+ console.log(`[${call}] ${next}`)
+ return next(call)
+ })
+
 /*
 setInterval(()=>{
   wishList.items[0].changePrice(

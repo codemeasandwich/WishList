@@ -1,0 +1,21 @@
+{
+  "suggestions_f":[
+    {
+      "name":"The Notebook",
+      "price":7.99,
+      "image":"https://images-na.ssl-images-amazon.com/images/I/51q0fjsL61L._SX314_BO1,204,203,200_.jpg"
+    },
+    {
+      "name":"The Sims 4 Cats & Dogs",
+      "price":24.49,
+      "image":"https://images-na.ssl-images-amazon.com/images/I/71iPS7fwEpL._SL1000_.jpg"
+    }
+  ],
+   "suggestions_m":[
+      {
+        "name":"Christmas Workshop Boy",
+        "price":19.99,
+        "image":"https://images-na.ssl-images-amazon.com/images/I/51ip%2Bd8BIYL._SX342_.jpg"
+      }
+    ]
+}

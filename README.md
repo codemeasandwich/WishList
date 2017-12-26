@@ -13,3 +13,10 @@ This will be done through building a little bookshop application using React, Mo
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+---
+
+### commands
+
+* yarn test
+* yarn start
+* yarn run json-server --port 3001 db.json
