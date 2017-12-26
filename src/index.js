@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { Group } from "./models/Group"
 import { onSnapshot, getSnapshot, addMiddleware } from "mobx-state-tree"
-
+/*
 let init = {
 
     users:{
@@ -16,6 +16,9 @@ let init = {
         "5fc2": { id:"5fc2", name: "Marge", gender:"f" },
     }
 }
+*/
+
+
 /*
 if (localStorage.getItem("wishlistapp")) {
   const json = JSON.parse(localStorage.getItem("wishlistapp"))
@@ -24,7 +27,8 @@ if (localStorage.getItem("wishlistapp")) {
   }
 }*/
 
-let group = Group.create(init)
+let group = window.group = Group.create({users:{}})//(init)
+//group.load()
 
 addMiddleware(group, (call,next)=>{
  console.log(`[${call}] ${next}`)
@@ -52,7 +56,7 @@ if (module && module.hot) {
   module.hot.accept(["./components/App"],()=>renderApp())
   module.hot.accept(["./models/WishList"],()=>{
     const snapshot = getSnapshot(group)
-    group = Group.create(snapshot)
+    group = window.group = Group.create(snapshot)
     renderApp()
   })
 }

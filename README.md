@@ -20,3 +20,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * yarn test
 * yarn start
 * yarn run json-server --port 3001 db.json
+
+
+#### other commands
+
+* dump state `JSON.stringify(group.toJSON())`
