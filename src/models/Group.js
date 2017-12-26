@@ -1,32 +1,18 @@
 import { types, flow, applySnapshot, onSnapshot, getSnapshot } from "mobx-state-tree"
 
 import { WishList } from "./WishList"
+import { createStorable } from "./Storable"
 
-const User = types.model({
+const User = types.compose(
+types.model({
   id:types.identifier(),//types.string,  
   name:types.string,
   gender: types.enumeration("gender",["m","f"]),//types.union(types.literal("m"),types.literal("f"))
   wishList: types.optional(WishList,{}),
   recipient: types.maybe( types.reference( types.late( ()=> User ) ) )
-})/*
-.views(self => ({ 
-  get other() { 
-   return getParent(self).get(self.recipient)
-  }
-}))*/
+})
 .actions(self => ({
-/*  setRecipient(recipient) { 
-    self.recipient = recipient.id
-  },*/
-  save(){
-    fetch(`http://localhost:3001/users/${self.id}`,{
-      method:"PUT",
-      headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify(getSnapshot(self))
-    })
-    .then(result => console.log("Saved"))
-    .catch(err => console.error("Problem saving",err))
-    },
+ 
   getSuggestions:flow(function * (){
     const data = yield fetch(`http://localhost:3001/suggestions_${self.gender}`)
     const suggestions = yield data.json()
@@ -35,15 +21,8 @@ const User = types.model({
   afterCreate(){
     onSnapshot(self,self.save)
   }
-/*getSuggestions(){
-    fetch(`http://localhost:3001/suggestions_${self.gender}`)
-    .then(data => data.json())
-    .then(suggestions => self.addSuggestions(suggestions) )
-  },
-  addSuggestions(suggestions){
-     self.wishList.items.push(...suggestions)
-  }*/
 }))
+,createStorable("users","id"))
 
 export const Group = types.model({
   users: types.map(User)
