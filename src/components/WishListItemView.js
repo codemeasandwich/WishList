@@ -9,7 +9,7 @@ class WishListItemView extends Component {
     this.state = { isEditing:false }
   }
   render(){
-    const {item} = this.props;
+    const {item, readonly} = this.props;
     
     if (this.state.isEditing) {
       return    <div className="media">
@@ -20,7 +20,7 @@ class WishListItemView extends Component {
                       <WishListItemEdit item={this.state.clone} /> 
                   </div>
                   <div className="media-right" style={{paddingRight: 10}}>
-                  <div class="btn-group" role="group" style={{width: 100}}>
+                  <div className="btn-group" role="group" style={{width: 100}}>
                       <button className="btn btn-info" style={{fontSize: "x-large"}} onClick={this.onSaveEdit}>🖬</button>
                       <button className="btn btn-danger" style={{fontSize: "x-large"}} onClick={this.onCancelEdit}>✘</button>
                   </div>
@@ -35,13 +35,16 @@ class WishListItemView extends Component {
       </div>
       <div className="media-body">
         <h3 className="media-heading">{item.name}</h3>
-        <span class="label label-warning">{item.price}</span>
+        <span className="label label-warning">{item.price}</span>
       </div>
       <div className="media-right" style={{paddingRight: 10}}>
-      <div class="btn-group" role="group" style={{width: 100}}>
+      {
+                  !readonly && 
+      <div className="btn-group" role="group" style={{width: 100}}>
           <button className="btn btn-primary" style={{fontSize: "x-large"}} onClick={this.onToggleEdit}> ✎ </button>
           <button className="btn btn-danger" style={{fontSize: "x-large"}} onClick={item.remove}>🗑</button>
       </div>
+      }
       </div>
     </div>)
   }

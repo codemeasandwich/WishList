@@ -7,7 +7,7 @@ How to model application state after your problem domain with Mobx-state-tree (M
 Finally you will see that MST allows you to solve certain problems generically by leveraging it's out of the box support for asynchronous actions, patches, snapshots and middleware.
 
 
-This will be done through building a little bookshop application using React, Mobx-state-tree (MST) and create-react-app.
+This will be done through building a little Wish-List application using React, Mobx-state-tree (MST) and create-react-app.
 
 ---
 

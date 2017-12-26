@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../assets/logo.gif';
+import { observer } from "mobx-react"
 
 
 import WishListView from "./WishListView"
@@ -15,24 +16,25 @@ class App extends Component {
         
     const { group } = this.props
     const selectedUser = group.users.get(this.state.selectedUser)
-   
     return (
       <div className="App">
         <div className="jumbotron"><h1 className="App-title">
           <img src={logo} className="App-logo" alt="logo" style={{width:250}}/>
           Wish List</h1><h3>
-            <select>
+            <select value={this.state.selectedUser||""}>
                 <option onClick={this.onSelectedUser}>
                 - select user -
                 </option>
                 {
                     group.users.values().map( user => <option key={user.id}
                                                               value={user.id}
-                                                              onClick={this.onSelectedUser}
-                                                              selected={user.name === this.state.selectedUser}>{user.name}</option> )
-                    
+                                                              onClick={this.onSelectedUser}>{user.name}</option> )
                 }
-            </select></h3>
+            </select>
+            <button onClick={group.drawLots}>
+            Draw lots
+            </button>
+            </h3>
         </div>
         
       {
@@ -40,6 +42,14 @@ class App extends Component {
       }{
         selectedUser && <button onClick={selectedUser.getSuggestions}>Suggestions</button>
       }
+      <h2>
+      { selectedUser && selectedUser.recipient ? "recipient: "+selectedUser.recipient.name : "" }
+      </h2>
+      {
+        selectedUser && selectedUser.recipient && <WishListView wishList={selectedUser.recipient.wishList} readonly/>
+      }
+      
+      
       </div>);
   }
   
@@ -48,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default observer(App);

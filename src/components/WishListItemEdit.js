@@ -8,13 +8,13 @@ class WishListItemEdit extends Component {
     
     return <div className="form-horizontal">
               <div className="form-group">
-                <label for="inputEmail3" className="col-sm-2 control-label">Things</label>
+                <label htmlFor="inputEmail3" className="col-sm-2 control-label">Things</label>
                 <div className="col-sm-10">
                   <input className="form-control" value={item.name} onChange={this.onNameChange}/>
                 </div>
               </div>
               <div className="form-group">
-                <label for="inputPassword3" className="col-sm-2 control-label">Price</label>
+                <label htmlFor="inputPassword3" className="col-sm-2 control-label">Price</label>
                 <div className="col-sm-10">
                   <input className="form-control" value={item.price} onChange={this.onPriceChange}/>
                 </div>

@@ -19,7 +19,7 @@ class WishListItemEntry extends Component{
         <WishListItemEdit item={this.state.entry} />
                   </div>
                   <div className="media-right" style={{paddingRight: 10}}>
-                  <div class="btn-group" role="group" style={{width: 100}}>
+                  <div className="btn-group" role="group" style={{width: 100}}>
                       <button className="btn btn-info" style={{fontSize: "x-large"}} onClick={this.onAdd}>🖬</button>
                   </div>
                   </div>
