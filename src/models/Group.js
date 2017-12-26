@@ -36,14 +36,30 @@ const User = types.model({
 export const Group = types.model({
   users: types.map(User)
 })
-.actions(self => ({
+.actions(self => {
+  
+  //let controller;
+  
+  return {
   afterCreate(){
     self.load()
   },
   load: flow(function* load(){
-    const response = yield fetch(`http://localhost:3001/users`)
-    applySnapshot(self.users, yield response.json())
+    //controller = window.AboutController()
+    try{
+      const response = yield fetch(`http://localhost:3001/users`)//,{ signal: controller.signal })
+      applySnapshot(self.users, yield response.json())
+      console.log("success")
+    } catch(e){
+      console.warn("abouted",e.name)
+    }
   }),
+  reload(){
+    self.load()
+  },
+  beforeDestroy(){
+   // controller && controller.about()
+  },
   drawLots(){
     
     const allUsers = self.users.values()
@@ -94,8 +110,10 @@ export const Group = types.model({
               }
       }  
     })*/
-  })
-}}))
+  }) // END allUsers.forEach
+} // END drawLots
+} // END return
+}) // END actions
  
 
 /*
