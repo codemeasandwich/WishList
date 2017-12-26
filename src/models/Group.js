@@ -1,4 +1,4 @@
-import { types, flow, applySnapshot } from "mobx-state-tree"
+import { types, flow, applySnapshot, onSnapshot, getSnapshot } from "mobx-state-tree"
 
 import { WishList } from "./WishList"
 
@@ -18,11 +18,23 @@ const User = types.model({
 /*  setRecipient(recipient) { 
     self.recipient = recipient.id
   },*/
+  save(){
+    fetch(`http://localhost:3001/users/${self.id}`,{
+      method:"PUT",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify(getSnapshot(self))
+    })
+    .then(result => console.log("Saved"))
+    .catch(err => console.error("Problem saving",err))
+    },
   getSuggestions:flow(function * (){
     const data = yield fetch(`http://localhost:3001/suggestions_${self.gender}`)
     const suggestions = yield data.json()
      self.wishList.items.push(...suggestions)
   }),
+  afterCreate(){
+    onSnapshot(self,self.save)
+  }
 /*getSuggestions(){
     fetch(`http://localhost:3001/suggestions_${self.gender}`)
     .then(data => data.json())
